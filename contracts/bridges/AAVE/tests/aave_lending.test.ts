@@ -1,171 +1,460 @@
-import { ethers } from "hardhat";
-import DefiBridgeProxy from "../../../../src/artifacts/contracts/DefiBridgeProxy.sol/DefiBridgeProxy.json";
-import { Contract, Signer, ContractFactory } from "ethers";
+import chai, { expect } from "chai";
+
+import hardhat, { ethers } from "hardhat";
+import { TestToken, AztecAssetType, AztecAsset, RollupProcessor } from "../../../../src/rollup_processor";
+
 import {
-  TestToken,
-  AztecAssetType,
-  AztecAsset,
-  RollupProcessor,
-} from "../../../../src/rollup_processor";
-
-import { AaveLendingBridge, ERC20 } from "../../../../typechain-types";
-
+	AaveLendingBridge,
+	AaveLendingBridge__factory,
+	DefiBridgeProxy,
+	DefiBridgeProxy__factory,
+	ERC20,
+	ERC20__factory,
+	IAToken,
+	IAToken__factory,
+} from "../../../../typechain-types";
 import { randomBytes } from "crypto";
+import { BigNumber, Signer } from "ethers";
+import { SignerWithAddress } from "@nomiclabs/hardhat-ethers/signers";
+import { parseUnits } from "@nomiclabs/hardhat-ethers/node_modules/@ethersproject/units";
 
 const fixEthersStackTrace = (err: Error) => {
-  err.stack! += new Error().stack;
-  throw err;
+	err.stack! += new Error().stack;
+	throw err;
 };
 
-describe("defi bridge", function () {
-  let rollupContract: RollupProcessor;
-  let aaveBridgeAddress: string;
-  let defiBridgeProxy: Contract;
+describe("Aave DeFi bridge", function () {
+	const daiAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
+	const aDaiAddress = "0x028171bCA77440897B824Ca71D1c56caC55b68A3";
+	const aaveAddressProvider = "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5";
 
-  const daiAddress = "0x6b175474e89094c44da98b954eedeac495271d0f";
-  const aDaiAddress = "0xfC1E690f61EFd961294b3e1Ce3313fBD8aa4f85d";
-  const aaveAddressProvider = "0xB53C1a33016B2DC2fF3653530bfF1848a515c8c5";
+	let aaveBridge: AaveLendingBridge;
+	let defiBridgeProxy: DefiBridgeProxy;
+	let processor: RollupProcessor;
+	let signer: SignerWithAddress;
 
-  let signer: Signer;
-  let aaveBridgeContract: AaveLendingBridge;
+	let dai: ERC20;
+	let aDai: IAToken;
 
-  const randomAddress = () => randomBytes(20).toString("hex");
+	const randomAddress = () => randomBytes(20).toString("hex");
 
-  beforeAll(async () => {
-    [signer] = await ethers.getSigners();
+	before(async () => {
+		[signer] = await ethers.getSigners();
+		console.log(`Blocknumber: ${await signer.provider?.getBlockNumber()}`);
 
-    const factory = new ContractFactory(
-      DefiBridgeProxy.abi,
-      DefiBridgeProxy.bytecode,
-      signer
-    );
-    defiBridgeProxy = await factory.deploy([]);
-    rollupContract = await RollupProcessor.deploy(signer, [
-      defiBridgeProxy.address,
-    ]);
-  });
+		defiBridgeProxy = await (await new DefiBridgeProxy__factory(signer).deploy()).deployed();
+		processor = await RollupProcessor.deploy(signer, defiBridgeProxy.address);
+		aaveBridge = await (
+			await new AaveLendingBridge__factory(signer).deploy(processor.address, aaveAddressProvider)
+		).deployed();
+		dai = ERC20__factory.connect(daiAddress, signer);
+		aDai = IAToken__factory.connect(aDaiAddress, signer);
+	});
 
-  beforeEach(async () => {
-    // deploy the bridge and pass in any args
-    const aaveFactory = await ethers.getContractFactory("AaveLendingBridge");
-    aaveBridgeContract = await aaveFactory.deploy(
-      rollupContract.address,
-      aaveAddressProvider
-    );
-    await aaveBridgeContract.deployed();
-  });
+	it("Add dai to zkAToken mapping", async () => {
+		expect(await aaveBridge.underlyingToZkAToken(dai.address)).to.be.eq(ethers.constants.AddressZero);
+		expect(await aaveBridge.setUnderlyingToZkAToken(dai.address));
+		expect(await aaveBridge.underlyingToZkAToken(dai.address)).to.not.be.eq(ethers.constants.AddressZero);
+	});
 
-  it("should allow us to configure a new underlying to zkAToken mapping", async () => {
-    const txResponse = await aaveBridgeContract
-      .setUnderlyingToZkAToken(daiAddress)
-      .catch(fixEthersStackTrace);
-    await txResponse.wait();
+	it("Add invalid underlying asset to zkAToken mapping (revert expected)", async () => {
+		expect(await aaveBridge.underlyingToZkAToken(aDai.address)).to.be.eq(ethers.constants.AddressZero);
+		await expect(aaveBridge.setUnderlyingToZkAToken(aDai.address)).to.be.revertedWith(
+			"AaveLendingBridge: NO_LENDING_POOL"
+		);
+		expect(await aaveBridge.underlyingToZkAToken(aDai.address)).to.be.eq(ethers.constants.AddressZero);
+	});
 
-    const zkAToken = await aaveBridgeContract.underlyingToZkAToken(daiAddress);
-    expect(zkAToken).toBeDefined;
-  });
+	it("Add dai to zkAToken mapping again (revert expected)", async () => {
+		expect(await aaveBridge.underlyingToZkAToken(dai.address)).to.not.be.eq(ethers.constants.AddressZero);
+		await expect(aaveBridge.setUnderlyingToZkAToken(dai.address)).to.be.revertedWith(
+			"AaveLendingBridge: ZK_TOKEN_SET"
+		);
+		expect(await aaveBridge.underlyingToZkAToken(dai.address)).to.not.be.eq(ethers.constants.AddressZero);
+	});
 
-  it("should not allow us to configure a new zkAToken if the underlying exists ", async () => {
-    const addDai = async () => {
-      return await aaveBridgeContract.setUnderlyingToZkAToken(daiAddress);
-    };
-    const txResponse = await addDai();
-    await txResponse.wait();
-    const zkAToken = await aaveBridgeContract.underlyingToZkAToken(daiAddress);
-    expect(zkAToken).toBeDefined;
-    await expect(addDai()).rejects.toThrow("AaveLendingBridge: ZK_TOKEN_SET");
-    const zkAToken2 = await aaveBridgeContract.underlyingToZkAToken(daiAddress);
-    expect(zkAToken).toBe(zkAToken2);
-  });
+	it("Fund processor with dai", async () => {
+		const depositAmount = parseUnits("10000", 18);
+		await processor.preFundContractWithToken(signer, {
+			name: "DAI",
+			amount: depositAmount,
+			erc20Address: dai.address,
+		});
+	});
 
-  it("should correctly mint zkATokens and send them back to the rollup when convert is called with the underlying asset", async () => {
-    const addDai = async () => {
-      return await aaveBridgeContract.setUnderlyingToZkAToken(daiAddress);
-    };
-    const txResponse = await addDai();
-    await txResponse.wait();
-    const zkATokenAddress = await aaveBridgeContract.underlyingToZkAToken(
-      daiAddress
-    );
+	it("Enter with money", async () => {
+		const zkATokenAddress = await aaveBridge.underlyingToZkAToken(dai.address);
+		const zkAToken = ERC20__factory.connect(zkATokenAddress, signer);
 
-    const inputAsset = {
-      assetId: 1,
-      erc20Address: daiAddress,
-      assetType: AztecAssetType.ERC20,
-    };
-    const outputAsset = {
-      assetId: 2,
-      erc20Address: zkATokenAddress,
-      assetType: AztecAssetType.ERC20,
-    };
+		const balanceBefore = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
 
-    const quantityOfDaiToDeposit = 1n * 10n ** 21n;
-    const interactionNonce = 1n;
-    // get  DAI into the rollup contract
+		const depositAmount = parseUnits("1000", 18);
 
-    await rollupContract.preFundContractWithToken(signer, {
-      erc20Address: daiAddress,
-      amount: quantityOfDaiToDeposit,
-      name: "DAI",
-    });
+		const inputAsset = {
+			assetId: 1,
+			erc20Address: dai.address,
+			assetType: AztecAssetType.ERC20,
+		};
+		const outputAsset = {
+			assetId: 2,
+			erc20Address: zkAToken.address,
+			assetType: AztecAssetType.ERC20,
+		};
 
-    const DAIContract = await ethers.getContractAt("ERC20", daiAddress, signer);
-    const aDAIContract = await ethers.getContractAt(
-      "ERC20",
-      aDaiAddress,
-      signer
-    );
-    const zkATokenContract = await ethers.getContractAt(
-      "ERC20",
-      zkATokenAddress,
-      signer
-    );
-    const before = {
-      rollupContract: {
-        DAI: BigInt(await DAIContract.balanceOf(rollupContract.address)),
-        zkAToken: BigInt(
-          await zkATokenContract.balanceOf(rollupContract.address)
-        ),
-      },
-      bridgeContract: {
-        aToken: BigInt(
-          await aDAIContract.balanceOf(aaveBridgeContract.address)
-        ),
-      },
-    };
+		const interactionNonce = BigNumber.from(1);
+		const auxData = BigNumber.from(0);
 
-    await rollupContract.convert(
-      signer,
-      aaveBridgeContract.address,
-      inputAsset,
-      {},
-      outputAsset,
-      {},
-      quantityOfDaiToDeposit,
-      1n,
-      0n
-    );
+		await processor.convert(
+			signer,
+			aaveBridge.address,
+			inputAsset,
+			{},
+			outputAsset,
+			{},
+			depositAmount,
+			interactionNonce,
+			auxData
+		);
 
-    const after = {
-      rollupContract: {
-        DAI: BigInt(await DAIContract.balanceOf(rollupContract.address)),
-        zkAToken: BigInt(
-          await zkATokenContract.balanceOf(rollupContract.address)
-        ),
-      },
-      bridgeContract: {
-        aToken: BigInt(
-          await aDAIContract.balanceOf(aaveBridgeContract.address)
-        ),
-      },
-    };
+		const balanceAfter = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
 
-    expect(before.rollupContract.DAI).toBe(quantityOfDaiToDeposit);
-    expect(before.rollupContract.zkAToken).toBe(0n);
-    expect(before.bridgeContract.aToken).toBe(0n);
-    expect(after.rollupContract.DAI).toBe(0n);
-    expect(after.bridgeContract.aToken).toBe(quantityOfDaiToDeposit);
+		expect(balanceAfter.rollup.DAI).to.be.eq(balanceBefore.rollup.DAI.sub(depositAmount));
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+	});
 
-    expect(after.rollupContract.zkAToken).toBe(940034212570988344321n);
-  });
+	it("Enter with additional money", async () => {
+		const zkATokenAddress = await aaveBridge.underlyingToZkAToken(dai.address);
+		const zkAToken = ERC20__factory.connect(zkATokenAddress, signer);
+
+		const balanceBefore = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		const depositAmount = parseUnits("3000", 18);
+
+		const inputAsset = {
+			assetId: 1,
+			erc20Address: dai.address,
+			assetType: AztecAssetType.ERC20,
+		};
+		const outputAsset = {
+			assetId: 2,
+			erc20Address: zkAToken.address,
+			assetType: AztecAssetType.ERC20,
+		};
+
+		const interactionNonce = BigNumber.from(2);
+		const auxData = BigNumber.from(0);
+
+		await processor.convert(
+			signer,
+			aaveBridge.address,
+			inputAsset,
+			{},
+			outputAsset,
+			{},
+			depositAmount,
+			interactionNonce,
+			auxData
+		);
+
+		const balanceAfter = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		expect(balanceAfter.rollup.DAI).to.be.eq(balanceBefore.rollup.DAI.sub(depositAmount));
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+	});
+
+	it("Exit with partial amount", async () => {
+		const zkATokenAddress = await aaveBridge.underlyingToZkAToken(dai.address);
+		const zkAToken = ERC20__factory.connect(zkATokenAddress, signer);
+
+		const balanceBefore = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		console.log(`Zk balance: ${balanceBefore.rollup.zk} scaled dai: ${balanceBefore.bridge.scaledDAI}`);
+		const withdrawAmount = parseUnits("500", 18);
+
+		const inputAsset = {
+			assetId: 2,
+			erc20Address: zkAToken.address,
+			assetType: AztecAssetType.ERC20,
+		};
+		const outputAsset = {
+			assetId: 1,
+			erc20Address: dai.address,
+			assetType: AztecAssetType.ERC20,
+		};
+
+		const interactionNonce = BigNumber.from(2);
+		const auxData = BigNumber.from(0);
+
+		await processor.convert(
+			signer,
+			aaveBridge.address,
+			inputAsset,
+			{},
+			outputAsset,
+			{},
+			withdrawAmount,
+			interactionNonce,
+			auxData
+		);
+
+		const balanceAfter = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		// Need to compute the expected amount withdraw using the actual index etc.
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceBefore.rollup.zk.sub(withdrawAmount));
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+
+		// expect(balanceAfter.rollup.DAI).to.be.eq(balanceBefore.rollup.DAI.add(depositAmount));
+		// expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+	});
+	
+	it("Exit with partial amount", async () => {
+		const zkATokenAddress = await aaveBridge.underlyingToZkAToken(dai.address);
+		const zkAToken = ERC20__factory.connect(zkATokenAddress, signer);
+
+		const balanceBefore = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		console.log(`Zk balance: ${balanceBefore.rollup.zk} scaled dai: ${balanceBefore.bridge.scaledDAI}`);
+		const withdrawAmount = parseUnits("500", 18);
+
+		const inputAsset = {
+			assetId: 2,
+			erc20Address: zkAToken.address,
+			assetType: AztecAssetType.ERC20,
+		};
+		const outputAsset = {
+			assetId: 1,
+			erc20Address: dai.address,
+			assetType: AztecAssetType.ERC20,
+		};
+
+		const interactionNonce = BigNumber.from(2);
+		const auxData = BigNumber.from(0);
+
+		await processor.convert(
+			signer,
+			aaveBridge.address,
+			inputAsset,
+			{},
+			outputAsset,
+			{},
+			withdrawAmount,
+			interactionNonce,
+			auxData
+		);
+
+		const balanceAfter = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		// Need to compute the expected amount withdraw using the actual index etc.
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceBefore.rollup.zk.sub(withdrawAmount));
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+
+		// expect(balanceAfter.rollup.DAI).to.be.eq(balanceBefore.rollup.DAI.add(depositAmount));
+		// expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+	});
+
+	it("Exit with partial amount", async () => {
+		const zkATokenAddress = await aaveBridge.underlyingToZkAToken(dai.address);
+		const zkAToken = ERC20__factory.connect(zkATokenAddress, signer);
+
+		const balanceBefore = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		console.log(`Zk balance: ${balanceBefore.rollup.zk} scaled dai: ${balanceBefore.bridge.scaledDAI}`);
+		const withdrawAmount = BigNumber.from(1);
+
+		const inputAsset = {
+			assetId: 2,
+			erc20Address: zkAToken.address,
+			assetType: AztecAssetType.ERC20,
+		};
+		const outputAsset = {
+			assetId: 1,
+			erc20Address: dai.address,
+			assetType: AztecAssetType.ERC20,
+		};
+
+		const interactionNonce = BigNumber.from(2);
+		const auxData = BigNumber.from(0);
+
+		await processor.convert(
+			signer,
+			aaveBridge.address,
+			inputAsset,
+			{},
+			outputAsset,
+			{},
+			withdrawAmount,
+			interactionNonce,
+			auxData
+		);
+
+		const balanceAfter = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		// Need to compute the expected amount withdraw using the actual index etc.
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceBefore.rollup.zk.sub(withdrawAmount));
+		expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+
+		// expect(balanceAfter.rollup.DAI).to.be.eq(balanceBefore.rollup.DAI.add(depositAmount));
+		// expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+	});
+
+	it("Exit with all", async () => {
+		// TODO: it breaks for some reason
+		const zkATokenAddress = await aaveBridge.underlyingToZkAToken(dai.address);
+		const zkAToken = ERC20__factory.connect(zkATokenAddress, signer);
+
+		const balanceBefore = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		const withdrawAmount = balanceBefore.rollup.zk;
+
+		const inputAsset = {
+			assetId: 2,
+			erc20Address: zkAToken.address,
+			assetType: AztecAssetType.ERC20,
+		};
+		const outputAsset = {
+			assetId: 1,
+			erc20Address: dai.address,
+			assetType: AztecAssetType.ERC20,
+		};
+
+		const interactionNonce = BigNumber.from(2);
+		const auxData = BigNumber.from(0);
+
+		await processor.convert(
+			signer,
+			aaveBridge.address,
+			inputAsset,
+			{},
+			outputAsset,
+			{},
+			withdrawAmount,
+			interactionNonce,
+			auxData
+		);
+
+		const balanceAfter = {
+			rollup: {
+				DAI: await dai.balanceOf(processor.address),
+				zk: await zkAToken.balanceOf(processor.address),
+			},
+			bridge: {
+				aDAI: await aDai.balanceOf(aaveBridge.address),
+				scaledDAI: await aDai.scaledBalanceOf(aaveBridge.address),
+			},
+		};
+
+		expect(balanceAfter.rollup.zk).to.be.eq(0);
+		expect(balanceAfter.bridge.scaledDAI).to.be.eq(0);
+		expect(balanceAfter.bridge.aDAI).to.be.eq(0);
+
+		// Need to compute the expected amount withdraw using the actual index etc.
+
+		// expect(balanceAfter.rollup.DAI).to.be.eq(balanceBefore.rollup.DAI.add(depositAmount));
+		// expect(balanceAfter.rollup.zk).to.be.eq(balanceAfter.bridge.scaledDAI);
+
+		// TODO: There seems to be some rounding issues that we should look at.
+	});
+
+	it("Call finalize (revert expected)", async () => {
+		// TODO:
+	});
 });

@@ -1,12 +1,12 @@
 {
   "_format": "hh-sol-cache-2",
   "files": {
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/AztecTypes.sol": {
-      "lastModificationDate": 1643315847027,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/AztecTypes.sol": {
+      "lastModificationDate": 1643462288531,
       "contentHash": "89c5c817c0fbf2444915b03ce4a4ddb5",
       "sourceName": "contracts/AztecTypes.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -18,7 +18,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -35,12 +36,12 @@
         "AztecTypes"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/MockRollupProcessor.sol": {
-      "lastModificationDate": 1643371556118,
-      "contentHash": "8e05e9dd8f9b4b58b1f6cbd6835b73f2",
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/MockRollupProcessor.sol": {
+      "lastModificationDate": 1643628495021,
+      "contentHash": "a028bcab14c11336d5a084992024ff42",
       "sourceName": "contracts/MockRollupProcessor.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -52,7 +53,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -76,12 +78,12 @@
         "MockRollupProcessor"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
-      "lastModificationDate": 1643198759253,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/@openzeppelin/contracts/utils/math/SafeMath.sol": {
+      "lastModificationDate": 1643368788369,
       "contentHash": "a6a9d6c1f662e922b82c1ba4d81cdd48",
       "sourceName": "@openzeppelin/contracts/utils/math/SafeMath.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -93,7 +95,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -110,12 +113,12 @@
         "SafeMath"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IDefiBridge.sol": {
-      "lastModificationDate": 1643370431194,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IDefiBridge.sol": {
+      "lastModificationDate": 1643462288541,
       "contentHash": "d02bcceb279e0f7bcf1af7b1d33c5056",
       "sourceName": "contracts/interfaces/IDefiBridge.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -127,7 +130,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -146,12 +150,12 @@
         "IDefiBridge"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/DefiBridgeProxy.sol": {
-      "lastModificationDate": 1643388976821,
-      "contentHash": "1d9a4d0ca9e54ddb48d15e1553a47605",
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/DefiBridgeProxy.sol": {
+      "lastModificationDate": 1643537502330,
+      "contentHash": "862d957a8200d245a236bc654342d506",
       "sourceName": "contracts/DefiBridgeProxy.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -163,7 +167,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -186,12 +191,12 @@
         "DefiBridgeProxy"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IERC20Permit.sol": {
-      "lastModificationDate": 1643016420739,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IERC20Permit.sol": {
+      "lastModificationDate": 1643462288541,
       "contentHash": "2f171100ea310c7c552990878cfec17f",
       "sourceName": "contracts/interfaces/IERC20Permit.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -203,7 +208,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -222,12 +228,12 @@
         "IERC20Permit"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/hardhat/console.sol": {
-      "lastModificationDate": 1642168824467,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/hardhat/console.sol": {
+      "lastModificationDate": 1643465283145,
       "contentHash": "cc4777addd464ea56fa35b1c45df0591",
       "sourceName": "hardhat/console.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -239,7 +245,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -256,12 +263,12 @@
         "console"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/libraries/TokenTransfers.sol": {
-      "lastModificationDate": 1643315813871,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/libraries/TokenTransfers.sol": {
+      "lastModificationDate": 1643462288545,
       "contentHash": "0dd65104d9c1009c49cfff15081a0600",
       "sourceName": "contracts/libraries/TokenTransfers.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -273,7 +280,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -290,12 +298,12 @@
         "TokenTransfers"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
-      "lastModificationDate": 1643198759257,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/@openzeppelin/contracts/token/ERC20/IERC20.sol": {
+      "lastModificationDate": 1643368788361,
       "contentHash": "302d9755e46bc69d7058b0cbe7185e37",
       "sourceName": "@openzeppelin/contracts/token/ERC20/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -307,7 +315,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -324,12 +333,12 @@
         "IERC20"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/ExampleBridge/ExampleBridge.sol": {
-      "lastModificationDate": 1643388917597,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/ExampleBridge/ExampleBridge.sol": {
+      "lastModificationDate": 1643462288538,
       "contentHash": "9094dba14746ece879e57713d87d2c51",
       "sourceName": "contracts/bridges/ExampleBridge/ExampleBridge.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -341,7 +350,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -364,12 +374,12 @@
         "ExampleBridgeContract"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IWrappedPosition.sol": {
-      "lastModificationDate": 1643016420739,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IWrappedPosition.sol": {
+      "lastModificationDate": 1643462288544,
       "contentHash": "2a1abf592e67f5852b6c022811885592",
       "sourceName": "contracts/interfaces/IWrappedPosition.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -381,7 +391,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -400,12 +411,12 @@
         "IWrappedPosition"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/ElementFinance/ElementBridge.sol": {
-      "lastModificationDate": 1643315897324,
-      "contentHash": "14d49f1fd74dab41af56e2694fcb0be2",
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/ElementFinance/ElementBridge.sol": {
+      "lastModificationDate": 1643628647408,
+      "contentHash": "ed268cc7686ed89cf75f1f3c7464ddd3",
       "sourceName": "contracts/bridges/ElementFinance/ElementBridge.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -417,7 +428,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -446,12 +458,12 @@
         "ElementBridge"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
-      "lastModificationDate": 1643198759257,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/@openzeppelin/contracts/token/ERC20/ERC20.sol": {
+      "lastModificationDate": 1643368788360,
       "contentHash": "f48de0eaae9544072b8766e2eac528a7",
       "sourceName": "@openzeppelin/contracts/token/ERC20/ERC20.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -463,7 +475,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -484,12 +497,12 @@
         "ERC20"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IVault.sol": {
-      "lastModificationDate": 1643135817590,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IVault.sol": {
+      "lastModificationDate": 1643462288543,
       "contentHash": "53d7ce15ed9a64e56bfa662a6d2e6df7",
       "sourceName": "contracts/interfaces/IVault.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -501,7 +514,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -519,12 +533,12 @@
         "IVault"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IPool.sol": {
-      "lastModificationDate": 1643135817590,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IPool.sol": {
+      "lastModificationDate": 1643462288541,
       "contentHash": "84521f7f69df2c04f05c4fa78160d094",
       "sourceName": "contracts/interfaces/IPool.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -536,7 +550,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -556,12 +571,12 @@
         "IPool"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/ITranche.sol": {
-      "lastModificationDate": 1643135817590,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ITranche.sol": {
+      "lastModificationDate": 1643462288542,
       "contentHash": "346e799c3e92c5d80894bdd9298cb23a",
       "sourceName": "contracts/interfaces/ITranche.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -573,7 +588,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -592,12 +608,12 @@
         "ITranche"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IRollupProcessor.sol": {
-      "lastModificationDate": 1643016420739,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IRollupProcessor.sol": {
+      "lastModificationDate": 1643462288542,
       "contentHash": "f335dbbb24ac52b82b8be52e46d2a6b1",
       "sourceName": "contracts/interfaces/IRollupProcessor.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -609,7 +625,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -626,12 +643,12 @@
         "IRollupProcessor"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
-      "lastModificationDate": 1643198759345,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol": {
+      "lastModificationDate": 1643368790658,
       "contentHash": "909ab67fc5c25033fe6cd364f8c056f9",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/IERC20Metadata.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -643,7 +660,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -662,12 +680,12 @@
         "IERC20Metadata"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/@openzeppelin/contracts/utils/Context.sol": {
-      "lastModificationDate": 1643198759085,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/@openzeppelin/contracts/utils/Context.sol": {
+      "lastModificationDate": 1643368779030,
       "contentHash": "5f2c5c4b6af2dd4551027144797bc8be",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -679,7 +697,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -696,12 +715,12 @@
         "Context"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/ERC20Mintable.sol": {
-      "lastModificationDate": 1643016420739,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/ERC20Mintable.sol": {
+      "lastModificationDate": 1643462288532,
       "contentHash": "6b527f9970827b68686307d8a3a67a5b",
       "sourceName": "contracts/ERC20Mintable.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -713,7 +732,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -732,12 +752,12 @@
         "ERC20Mintable"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
-      "lastModificationDate": 1643198759345,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/node_modules/@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol": {
+      "lastModificationDate": 1643368790657,
       "contentHash": "9f43a2bc39b89ae302f1727697f9c420",
       "sourceName": "@openzeppelin/contracts/token/ERC20/extensions/ERC20Burnable.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -749,7 +769,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -769,12 +790,12 @@
         "ERC20Burnable"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/AAVE/ZkAToken.sol": {
-      "lastModificationDate": 1643221662164,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/AAVE/ZkAToken.sol": {
+      "lastModificationDate": 1643462288535,
       "contentHash": "808f4881afbe209254cc16a264cc8917",
       "sourceName": "contracts/bridges/AAVE/ZkAToken.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -786,7 +807,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -807,12 +829,12 @@
         "ZkAToken"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/AAVE/AAVELending.sol": {
-      "lastModificationDate": 1643371930619,
-      "contentHash": "0c315b8b7a7a607cf91959ef93edba0f",
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/AAVE/AAVELending.sol": {
+      "lastModificationDate": 1643537879590,
+      "contentHash": "6b53357d7ec143bf44af4dd63a05c868",
       "sourceName": "contracts/bridges/AAVE/AAVELending.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -824,7 +846,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -852,12 +875,12 @@
         "IScaledBalanceToken"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/AAVE/IERC20.sol": {
-      "lastModificationDate": 1643315343821,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/AAVE/IERC20.sol": {
+      "lastModificationDate": 1643475061136,
       "contentHash": "8dd377d14e85a7e88b981d0511fbf11a",
       "sourceName": "contracts/bridges/AAVE/IERC20.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -869,7 +892,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -887,12 +911,12 @@
         "IERC20Detailed"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/AAVE/ILendingPoolAddressesProvider.sol": {
-      "lastModificationDate": 1643287544641,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/AAVE/ILendingPoolAddressesProvider.sol": {
+      "lastModificationDate": 1643462288534,
       "contentHash": "b87dd49ce4603f9d32ab828e48ff085e",
       "sourceName": "contracts/bridges/AAVE/ILendingPoolAddressesProvider.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -904,7 +928,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -921,12 +946,12 @@
         "ILendingPoolAddressesProvider"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/bridges/AAVE/WadRayMath.sol": {
-      "lastModificationDate": 1643199548866,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/AAVE/WadRayMath.sol": {
+      "lastModificationDate": 1643462288534,
       "contentHash": "5a1897eec542152688a15b14464aef0e",
       "sourceName": "contracts/bridges/AAVE/WadRayMath.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -938,7 +963,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -955,12 +981,12 @@
         "WadRayMath"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/ISwapRouter.sol": {
-      "lastModificationDate": 1643016420739,
-      "contentHash": "9cee94f19d5a8b561dd95216b009a1f1",
-      "sourceName": "contracts/interfaces/ISwapRouter.sol",
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ICurveFactory.sol": {
+      "lastModificationDate": 1643462288538,
+      "contentHash": "bf7a7b22b2b98e8fc816a67c18aea06d",
+      "sourceName": "contracts/interfaces/ICurveFactory.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -972,7 +998,183 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "ICurveFactory"
+      ]
+    },
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ICurveProvider.sol": {
+      "lastModificationDate": 1643462288538,
+      "contentHash": "46acc48fa042aa3a9cc055ad11f1f9b0",
+      "sourceName": "contracts/interfaces/ICurveProvider.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "ICurveProvider"
+      ]
+    },
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ICurveRegistry.sol": {
+      "lastModificationDate": 1643462288539,
+      "contentHash": "a3728b73b167414ef8fe592ad1dc1852",
+      "sourceName": "contracts/interfaces/ICurveRegistry.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "ICurveRegistry"
+      ]
+    },
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ICurveStablePool.sol": {
+      "lastModificationDate": 1643462288539,
+      "contentHash": "43bd1d098112ba861a31f9a383fcf505",
+      "sourceName": "contracts/interfaces/ICurveStablePool.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "ICurveStablePool"
+      ]
+    },
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ICurveZap.sol": {
+      "lastModificationDate": 1643462288539,
+      "contentHash": "36a1b7741141ff63c463826c1aa2f860",
+      "sourceName": "contracts/interfaces/ICurveZap.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.7.5"
+      ],
+      "artifacts": [
+        "ICurveZap"
+      ]
+    },
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/ISwapRouter.sol": {
+      "lastModificationDate": 1643462288542,
+      "contentHash": "9cee94f19d5a8b561dd95216b009a1f1",
+      "sourceName": "contracts/interfaces/ISwapRouter.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -989,12 +1191,12 @@
         "ISwapRouter"
       ]
     },
-    "/mnt/user-data/joe/aztec-connect-starter/contracts/interfaces/IWETH.sol": {
-      "lastModificationDate": 1643016420739,
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/interfaces/IWETH.sol": {
+      "lastModificationDate": 1643462288543,
       "contentHash": "f869ff1a3d19edb6970c3291481453f2",
       "sourceName": "contracts/interfaces/IWETH.sol",
       "solcConfig": {
-        "version": "0.8.10",
+        "version": "0.8.4",
         "settings": {
           "optimizer": {
             "enabled": false,
@@ -1006,7 +1208,8 @@
                 "abi",
                 "evm.bytecode",
                 "evm.deployedBytecode",
-                "evm.methodIdentifiers"
+                "evm.methodIdentifiers",
+                "metadata"
               ],
               "": [
                 "ast"
@@ -1021,6 +1224,43 @@
       ],
       "artifacts": [
         "WETH"
+      ]
+    },
+    "/Users/lasseherskind/GitHub/aztec-connect-bridges/contracts/bridges/AAVE/IAToken.sol": {
+      "lastModificationDate": 1643476530227,
+      "contentHash": "f8f4f95dd41d25a2c172f821abefbc6a",
+      "sourceName": "contracts/bridges/AAVE/IAToken.sol",
+      "solcConfig": {
+        "version": "0.8.4",
+        "settings": {
+          "optimizer": {
+            "enabled": false,
+            "runs": 200
+          },
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./IERC20.sol"
+      ],
+      "versionPragmas": [
+        ">=0.6.10 <=0.8.10"
+      ],
+      "artifacts": [
+        "IAToken"
       ]
     }
   }

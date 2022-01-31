@@ -19,7 +19,7 @@ const config: HardhatUserConfig = {
     ],
     settings: {
       evmVersion: "london",
-      optimizer: { enabled: true, runs: 200 },
+      optimizer: { enabled: false, runs: 200 },
     },
   },
   typechain: {

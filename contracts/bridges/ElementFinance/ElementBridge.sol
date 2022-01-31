@@ -317,7 +317,7 @@ contract ElementBridge is IDefiBridge {
     AztecTypes.AztecAsset calldata,
     uint256 interactionNonce,
     uint64
-  ) external payable returns (uint256 outputValueA, uint256 outputValueB) {
+  ) external payable override returns (uint256 outputValueA, uint256 outputValueB) {
     require(msg.sender == rollupProcessor, "ElementBridge: INVALID_CALLER");
     // retrieve the interaction and verify it's ready for finalising
     Interaction storage interaction = interactions[interactionNonce];
